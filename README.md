@@ -21,17 +21,29 @@ Vous devez donc écrire une lambda (runtime de votre choix) qui va trouver le en
 
 Attention! Le fichier peut seulement être lu par le service AWS Lambda utilisant le rôle d’exécution suivant XXXXX.
 
-## Épreuve 2: Enregistrer votre voiture au directeur de course
-Maintenant que vous avez trouvé l’URL du directeur de course, il est temps d’enregistrer la voiture afin de commencer à recevoir les messages!
+## Épreuve 2: Enregistrer votre équipe au directeur de course
+Maintenant que vous avez trouvé l’URL du directeur de course, il est temps d’enregistrer votre équipe pour pouvoir participer à la course!
 
-Créez un service AWS ECS qui sera utilisé pour enregistrer votre voiture. Vous aurez besoin d’un token pour enregistrer ce service. Le token est dans un service AWS bien connu pour la gestion des secrets. 
+Créez un service AWS ECS qui sera utilisé pour enregistrer votre équipe. Vous aurez besoin d’un token pour enregistrer ce service. Le token est dans un service AWS bien connu pour la gestion des secrets. 
 
 Quelques informations utiles:
 - Le service doit être déployé dans le subnet xxxxxx
 - L’image ECR à utiliser est la suivante xxx
 - Le service ECS doit utiliser les variables d'environnement suivantes pour enregistrer la voiture correctement:
-  - RACE_DIRECTOR_URL: URL du directeur de course trouvé plus tôt
-  - DRIVER_NAME: Nom de votre pilote/équipe
-  - REGISTRATION_TOKEN: Token pour l’enregistrement de la voiture.
+  - **RACE_DIRECTOR_URL**: URL du directeur de course trouvé plus tôt
+  - **DRIVER_NAME**: Nom de votre pilote/équipe
+  - **REGISTRATION_TOKEN**: Token pour l’enregistrement de la voiture.
 
+## Épreuve 3: Créer votre service de voiture
+...
 
+## Épreuve 4: Enregistrer votre voiture au directeur de course
+Maintenant que vous avez l’URL de votre service de voiture, il est temps d’enregistrer votre voiture pour pouvoir commencer à accumuler des tours de piste!
+
+Redéployez le service d'enregistremene utilisé à l'étape 2 en y ajoutant la variable d'environnement suivante:
+- **CAR_SERVICE_URL**: Url du load balancer de votre service de voiture
+
+## Épreuve 5: Recevoir les messages du directeur de course
+Si vous avez réussi toutes les épreuves précédentes, votre service de voiture devrait maintenant recevoir de messages réguliers du directeur de course. 
+
+Cumulez plus de tours de pistes que les autres équipes afin de remporter le grand prix!
