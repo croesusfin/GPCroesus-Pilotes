@@ -18,7 +18,7 @@ La voiture avec le plus de tours complétés après 3 heures sera déclarée gag
 La première étape est de trouver l’URL du directeur de course. Celle-ci sera utilisée pour enregistrer votre voiture et recevoir les messages utilisés pour compléter des tours de piste.
 Le URL du endpoint est dans un fichier à l'intérieur du bucket S3 XXXYYYZZZ. À vous de le trouver!
 
-Vous devez donc écrire une lambda (runtime de votre choix) qui va trouver le endpoint parmi tous les fichiers du bucket. Pour vous aider un peu, le nom du fichier contenant l’URL est disponible dans Parameter Store sous le path suivant /xxx/yyy/zzz.
+Vous devez donc écrire une lambda (runtime de votre choix) qui va trouver le endpoint parmi tous les fichiers du bucket. Pour vous aider un peu, le nom du fichier contenant l’URL est disponible dans Parameter Store sous le path suivant: /grandprix/teams/*teamId*/challenge1/filename.
 
 Attention! Le fichier peut seulement être lu par le service AWS Lambda utilisant le rôle d’exécution suivant XXXXX.
 
@@ -37,16 +37,16 @@ Quelques informations utiles:
   - **REGISTRATION_TOKEN**: Token pour l’enregistrement de la voiture.
 
 ## Épreuve 3: Créer votre service de voiture
-Afin de recevoir les messages du directeur de course pour compléter des tours, vous devrez mettre en place un service de voiture qui recevra les messages.
+Afin de recevoir les messages du directeur de course pour compléter des tours, vous devrez mettre en place un service de voiture qui recevra les messages:
 - Le service doit être déployé dans le subnet xxxx.
 - Un ALB doit absolument être utilisé. Le endpoint du load balancer doit être envoyé au directeur de course.
-- Le directeur enverra des payloads JSON à chaque 5 secondes sur le port 12345
+- Le directeur enverra des payloads JSON à chaque 5 secondes à votre service, sur le port 12345:
   - Les messages seront envoyés avec un POST sur le chemin /startLap
   - Le payload contiendra un *lapId* que vous devrez utiliser pour récupérer les informations sur le lap en question
-    - Vous devrez récépérer ces informations dans la table DynamoDB xxxyyyzzz et répondre correctement en fonction des détails indiqués pour le tour
+    - Vous devrez récépérer ces informations dans la table DynamoDB xxxyyyzzz et répondre correctement en fonction des détails indiqués pour le tour (voir plus bas)
 - Il y a deux actions à faire pour répondre à un message:
   - Répondre HTTP 200 à l'appel à /startLap
-  - Placer un message dans une queue SQS
+  - Placer un message dans une queue SQS xxxyyyzzz
 
 ### Format du paylod JSON de la requête HTTP
     {
@@ -55,7 +55,7 @@ Afin de recevoir les messages du directeur de course pour compléter des tours, 
 
 ### Détails sur les laps
 Pour chaque lap, les champs suivants seront disponibles dans le table DynamoDB:
-  - lapId: L'identifiant du tour
+  - lapId: L'identifiant du tour. Utilisez celui reçu dans le requête HTTP pour trouver le bon enregistrement de tour.
   - lapStatus: Le statut du tour
     - DONE: Le tour est complété avec succès
     - PITSTOP: Vous devez faire un pit stop et répondre à une question
