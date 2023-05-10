@@ -74,7 +74,7 @@ Pour chaque lap, les champs suivants seront disponibles dans le table DynamoDB:
 Maintenant que vous avez l’URL de votre service de voiture, il est temps d’enregistrer votre voiture pour pouvoir commencer à accumuler des tours de piste!
 
 Redéployez le service d'enregistremene utilisé à l'étape 2 en y ajoutant la variable d'environnement suivante:
-- **CAR_SERVICE_URL**: Url du load balancer de votre service de voiture
+- **CAR_SERVICE_URL**: URL du load balancer de votre service de voiture
 
 ## Épreuve 5: Recevoir les messages du directeur de course
 Si vous avez réussi toutes les épreuves précédentes, votre service de voiture devrait maintenant recevoir de messages réguliers du directeur de course. 
