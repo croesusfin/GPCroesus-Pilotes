@@ -55,12 +55,12 @@ Afin de recevoir les messages du directeur de course pour compléter des tours, 
 
 ### Détails sur les laps
 Pour chaque lap, les champs suivants seront disponibles dans le table DynamoDB:
-  - lapId: L'identifiant du tour. Utilisez celui reçu dans le requête HTTP pour trouver le bon enregistrement de tour.
-  - lapStatus: Le statut du tour
-    - DONE: Le tour est complété avec succès
-    - PITSTOP: Vous devez faire un pit stop et répondre à une question
-  - lapTime: Le temps prit pour le tour
-  - lapPitStopQ: Si lapStatus == PITSTOP, la question à répondre pour sortir du pitStop
+  - **lapId**: L'identifiant du tour. Utilisez celui reçu dans le requête HTTP pour trouver le bon enregistrement de tour.
+  - **lapStatus**: Le statut du tour
+    - **DONE**: Le tour est complété avec succès
+    - **PITSTOP**: Vous devez faire un pit stop et répondre à une question
+  - **lapTime**: Le temps prit pour le tour
+  - **lapPitStopQ**: Si lapStatus == PITSTOP, la question à répondre pour sortir du pitStop
 
 ### Format de la réponse JSON à placer dans la queue SQS
     {
