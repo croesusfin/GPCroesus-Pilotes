@@ -10,9 +10,9 @@ La voiture avec le plus de tours complétés après 3 heures sera déclarée gag
 # Épreuves
 
 ## Informations utiles à savoir avant de commencer
-- Compte AWS à utiliser: gpcroesus-2023-sandbox (560247168066)
+- Compte AWS à utiliser: `gpcroesus-2023-sandbox` (560247168066)
   - Vous devriez être en mesure de vous y connecter via la console AWS avec votre compte AWS Croesus
-- Vous aurex besoin de votre identifiant d'équipe (*teamId*) qui vous a été communiqué lorsque vous vous êtes inscrits à l'événement.
+- Vous aurez besoin de votre identifiant d'équipe (*teamId*) qui vous a été communiqué lorsque vous vous êtes inscrits à l'événement.
 
 ## Épreuve 1: Trouver le endpoint du directeur de course
 La première étape est de trouver l’URL du directeur de course. Celle-ci sera utilisée pour enregistrer votre voiture et recevoir les messages utilisés pour compléter des tours de piste.
