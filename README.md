@@ -37,7 +37,7 @@ Quelques informations utiles:
   - **DRIVER_NAME**: Nom de votre pilote/équipe
   - **REGISTRATION_TOKEN**: Token pour l’enregistrement de la voiture.
 
-## Épreuve 3: Créer votre service de voiturer
+## Épreuve 3: Créer votre service de voiture
 Afin de recevoir les messages du directeur de course pour compléter des tours, vous devrez mettre en place un service de voiture qui recevra les messages:
 - Le service doit être déployé dans le subnet xxxx.
 - Un ALB doit absolument être utilisé. Le endpoint du load balancer doit être envoyé au directeur de course.
