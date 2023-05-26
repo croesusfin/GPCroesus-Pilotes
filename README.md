@@ -17,7 +17,7 @@ La voiture avec le plus de tours complétés après 3 heures sera déclarée gag
 
 ## Épreuve 1: Trouver le endpoint du directeur de course
 La première étape est de trouver l’URL du directeur de course. Celle-ci sera utilisée pour enregistrer votre voiture et recevoir les messages utilisés pour compléter des tours de piste.
-Le URL du endpoint est dans un fichier à l'intérieur du bucket S3 XXXYYYZZZ. À vous de le trouver!
+Le URL du endpoint est dans un fichier à l'intérieur du bucket S3 gpcroesus-2023-team-N (*N* est votre identifiant d'équipe, i.e. *teamId*). À vous de le trouver!
 
 Vous devez donc écrire une lambda (runtime de votre choix) qui va trouver le endpoint parmi tous les fichiers du bucket. Pour vous aider un peu, le nom du fichier contenant l’URL est disponible dans Parameter Store sous le path suivant: /grandprix/teams/*teamId*/challenge1/filename.
 
