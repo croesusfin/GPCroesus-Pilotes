@@ -19,7 +19,7 @@ La voiture avec le plus de tours complétés après 3 heures sera déclarée gag
 La première étape est de trouver l’URL du directeur de course. Celle-ci sera utilisée pour enregistrer votre voiture et recevoir les messages utilisés pour compléter des tours de piste.
 Le URL du endpoint est dans un fichier à l'intérieur du bucket S3 gpcroesus-2023-team-N (*N* est votre identifiant d'équipe, i.e. *teamId*). À vous de le trouver!
 
-Vous devez donc écrire une Lambda (runtime de votre choix) qui va trouver l'URL caché dans un des fichiers du bucket S3. Pour vous aider un peu, le nom du fichier contenant l’URL est disponible 
+Vous devez donc écrire une Lambda Python qui va trouver l'URL caché dans un des fichiers du bucket S3. Pour vous aider un peu, le nom du fichier contenant l’URL est disponible 
 dans Parameter Store sous le path suivant: /grandprix/teams/*teamId*/challenge1/filename.
 
 Attention! Le fichier et le paramètre peuvent seulement être lus par la ressource Lambda créé d'avance pour vous, soit teamN-lambda (*N* est votre identifiant d'équipe, i.e. *teamId*)).
