@@ -21,7 +21,7 @@ Le URL du endpoint est dans un fichier à l'intérieur du bucket S3 gpcroesus-20
 
 Vous devez donc écrire une Lambda (runtime de votre choix) qui va trouver le endpoint parmi tous les fichiers du bucket. Pour vous aider un peu, le nom du fichier contenant l’URL est disponible dans Parameter Store sous le path suivant: /grandprix/teams/*teamId*/challenge1/filename.
 
-Attention! Le fichier peut seulement être lu par la ressource Lambda créé d'avance pour vous, soit teamN-lambda (*N* est votre identifiant d'équipe, i.e. *teamId*)).
+Attention! Le fichier et le paramèter peuvent seulement être lus par la ressource Lambda créé d'avance pour vous, soit teamN-lambda (*N* est votre identifiant d'équipe, i.e. *teamId*)).
 
 ## Épreuve 2: Enregistrer votre équipe au directeur de course
 Maintenant que vous avez trouvé l’URL du directeur de course, il est temps d’enregistrer votre équipe pour pouvoir participer à la course!
