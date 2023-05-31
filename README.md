@@ -45,10 +45,10 @@ Afin de recevoir les messages du directeur de course pour compléter des tours, 
 - Le directeur enverra des payloads JSON à chaque 5 secondes à votre service, sur le port 12345:
   - Les messages seront envoyés avec un POST sur le chemin /startLap
   - Le payload contiendra un *lapId* que vous devrez utiliser pour récupérer les informations sur le lap en question
-    - Vous devrez récupérer ces informations dans la table DynamoDB xxxyyyzzz et répondre correctement en fonction des détails indiqués pour le tour (voir plus bas)
+    - Vous devrez récupérer ces informations dans la table DynamoDB gpcroesus-table et répondre correctement en fonction des détails indiqués pour le tour (voir plus bas)
 - Il y a deux actions à faire pour répondre à un message:
   - Répondre HTTP 200 à l'appel à /startLap
-  - Placer un message dans une queue SQS xxxyyyzzz
+  - Placer un message dans une queue SQS gpcroesus-lap-queue
 
 ### Format du paylod JSON de la requête HTTP
     {
@@ -61,7 +61,7 @@ Pour chaque lap, les champs suivants seront disponibles dans la table DynamoDB:
   - **lapStatus**: Le statut du lap
     - **DONE**: Le lap est complété avec succès
     - **PITSTOP**: Vous devez faire un pit stop et répondre à une question!
-  - **lapTime**: Le temps prit pour le lap
+  - **lapTime**: Si lapStatus == DONE, le temps prit pour le lap tel que récupéré de la table DynamoDB
   - **lapPitStopQ**: Si lapStatus == PITSTOP, la question à répondre pour sortir du pit stop
 
 ### Format de la réponse JSON à placer dans la queue SQS
