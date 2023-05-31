@@ -48,7 +48,7 @@ Afin de recevoir les messages du directeur de course pour compléter des tours, 
     - Vous devrez récupérer ces informations dans la table DynamoDB gpcroesus-table et répondre correctement en fonction des détails indiqués pour le tour (voir plus bas)
 - Il y a deux actions à faire pour répondre à un message:
   - Répondre HTTP 200 à l'appel à /startLap
-  - Placer un message dans une queue SQS gpcroesus-lap-queue
+  - Placer un message de réponse dans la queue SQS gpcroesus-lap-queue
 
 ### Format du paylod JSON de la requête HTTP
     {
@@ -75,7 +75,7 @@ Pour chaque lap, les champs suivants seront disponibles dans la table DynamoDB:
 ## Épreuve 4: Enregistrer votre voiture au directeur de course
 Maintenant que vous avez l’URL de votre service de voiture, il est temps d’enregistrer votre voiture pour pouvoir commencer à accumuler des tours de piste!
 
-Redéployez le service d'enregistremene utilisé à l'étape 2 en y ajoutant la variable d'environnement suivante:
+Redéployez le service d'enregistrement utilisé à l'étape 2 en y ajoutant la variable d'environnement suivante:
 - **CAR_SERVICE_URL**: URL du load balancer de votre service de voiture
 
 ## Épreuve 5: Recevoir les messages du directeur de course
