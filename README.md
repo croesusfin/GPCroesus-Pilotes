@@ -42,7 +42,7 @@ Quelques informations utiles:
 Afin de recevoir les messages du directeur de course pour compléter des tours, vous devrez mettre en place un service de voiture qui recevra les messages:
 - Le service doit être déployé dans le subnet team-N-subnet-a ou team-N-subnet-b (*N* est votre identifiant d'équipe, i.e. *teamId*)
 - Un ALB doit absolument être utilisé. Le endpoint du load balancer doit être envoyé au directeur de course
-- Le directeur enverra des payloads JSON à chaque 5 secondes à votre service, sur le port 12345:
+- Le directeur enverra des payloads JSON à chaque 15 secondes à votre service, sur le port 12345:
   - Les messages seront envoyés avec un POST sur le chemin /startLap
   - Le payload contiendra un *lapId* que vous devrez utiliser pour récupérer les informations sur le lap en question
     - Vous devrez récupérer ces informations dans la table DynamoDB gpcroesus-laps et répondre correctement en fonction des détails indiqués pour le tour (voir plus bas)
