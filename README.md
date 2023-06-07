@@ -16,13 +16,13 @@ La voiture avec le plus de tours complétés après 3 heures sera déclarée gag
   - Votre mot de passe: *** 
 
 ## Épreuve 1: Trouver le endpoint du directeur de course
-La première étape est de trouver l’URL du directeur de course. Celle-ci sera utilisée pour enregistrer votre voiture et recevoir les messages utilisés pour compléter des tours de piste.
-Le URL du endpoint est dans un fichier à l'intérieur du bucket S3 gpcroesus-2023-team-N (*N* est votre identifiant d'équipe, i.e. *teamId*). À vous de le trouver!
+La première étape est de trouver l’URL du directeur de course. Celle-ci sera utilisée pour enregistrer votre voiture et recevoir les appels pour compléter des tours de piste.
+Le URL du directeur de course est dans un fichier à l'intérieur du bucket S3 gpcroesus-2023-team-N (*N* est votre identifiant d'équipe, i.e. *teamId*). À vous de le trouver!
 
 Vous devez donc écrire une Lambda en Python (et probablement utiliser le SDK AWS PYthon Boto3, https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) qui va trouver l'URL 
 caché dans un des fichiers du bucket S3. Pour vous aider un peu, le nom du fichier contenant l’URL est disponible dans Parameter Store sous le path suivant: /grandprix/teams/*teamId*/challenge1/filename.
 
-Attention! Le fichier et le paramètre peuvent seulement être lus par la ressource Lambda créé d'avance pour vous, soit teamN-lambda (*N* est votre identifiant d'équipe, i.e. *teamId*)).
+Attention! Le fichier et le paramètre peuvent seulement être lus par la ressource Lambda créé d'avance pour vous, soit team-N-challenge1-lambda (*N* est votre identifiant d'équipe, i.e. *teamId*)).
 
 ## Épreuve 2: Enregistrer votre équipe au directeur de course
 Maintenant que vous avez trouvé l’URL du directeur de course, il est temps d’enregistrer votre équipe pour pouvoir participer à la course!
@@ -56,13 +56,15 @@ Afin de recevoir les messages du directeur de course pour compléter des tours, 
     }
 
 ### Détails sur les laps
-Pour chaque lap, les champs suivants seront disponibles dans la table DynamoDB:
+Pour chaque lap, les champs suivants sont disponibles dans la table DynamoDB:
   - **lapId**: L'identifiant du lap. Utilisez celui reçu dans le requête HTTP pour trouver le bon enregistrement de lap.
   - **lapStatus**: Le statut du lap
     - **DONE**: Le lap est complété avec succès, vous devrez retourner le temps pris
     - **PITSTOP**: Vous devrez faire un pit stop et répondre à une question!
   - **lapTime**: Si lapStatus == DONE, le temps prit pour le lap tel que récupéré de la table DynamoDB
   - **lapPitStopQ**: Si lapStatus == PITSTOP, la question à répondre pour sortir du pit stop
+
+Note: Vous devez demander spécifiquement les attributs lapStatus, lapTime, lapPitStopQ lorsque vous faites votre get_item à DynamoDB, en utilisant lapId comme clé.
 
 ### Format de la réponse JSON à placer dans la queue SQS
     {
