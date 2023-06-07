@@ -22,7 +22,7 @@ Le URL du directeur de course est dans un fichier à l'intérieur du bucket S3 g
 Vous devez donc écrire une Lambda en Python (et probablement utiliser le SDK AWS PYthon Boto3, https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) qui va trouver l'URL 
 caché dans un des fichiers du bucket S3. Pour vous aider un peu, le nom du fichier contenant l’URL est disponible dans Parameter Store sous le path suivant: /grandprix/teams/*teamId*/challenge1/filename.
 
-Attention! Le fichier et le paramètre peuvent seulement être lus par la ressource Lambda créé d'avance pour vous, soit team-N-challenge1-lambda (*N* est votre identifiant d'équipe, i.e. *teamId*)).
+Attention! Le fichier et le paramètre peuvent seulement être lus par la ressource Lambda créé d'avance pour vous, soit team-N-challenge1-lambda (*N* est votre identifiant d'équipe, i.e. *teamId*).
 
 ## Épreuve 2: Enregistrer votre équipe au directeur de course
 Maintenant que vous avez trouvé l’URL du directeur de course, il est temps d’enregistrer votre équipe pour pouvoir participer à la course!
@@ -39,21 +39,15 @@ Quelques informations utiles:
   - **REGISTRATION_TOKEN**: Token pour l’enregistrement de la voiture.
 
 ## Épreuve 3: Créer votre service de voiture
-Afin de recevoir les messages du directeur de course pour compléter des tours, vous devrez mettre en place un service de voiture qui recevra les messages:
-- Le service doit être déployé dans le subnet team-N-subnet-a ou team-N-subnet-b (*N* est votre identifiant d'équipe, i.e. *teamId*)
-- Un ALB doit absolument être utilisé. Le endpoint du load balancer doit être envoyé au directeur de course
-- Le directeur enverra des payloads JSON à chaque 15 secondes à votre service, sur le port 12345:
-  - Les messages seront envoyés avec un POST sur le chemin /startLap
+Afin de recevoir les appels du directeur de course afin de compléter des tours, vous devrez mettre en place un service de voiture qui recevra les appels:
+- Le service doit être implémenté dans une Lambda en Python. Utiliser le squelette team-N-challenge3-lambda (*N* est votre identifiant d'équipe, i.e. *teamId*))
+- Le directeur enverra des tours à l'URL de votre Lambda (nommé CAR_SERVICE_URL dans le reste du document) à chaque 15 secondes environ:
+  - Les appels seront envoyés avec un GET comme ceci: CAR_SERVICE_URL/startLap/?LapId=<lapId>
   - Le payload contiendra un *lapId* que vous devrez utiliser pour récupérer les informations sur le lap en question
     - Vous devrez récupérer ces informations dans la table DynamoDB gpcroesus-laps et répondre correctement en fonction des détails indiqués pour le tour (voir plus bas)
 - Il y a deux actions à faire pour répondre à un message:
   - Répondre HTTP 200 à l'appel à /startLap
   - Placer un message de réponse dans la queue SQS gpcroesus-lap-queue
-
-### Format du paylod JSON de la requête HTTP
-    {
-      "lapId": "abcde12345"
-    }
 
 ### Détails sur les laps
 Pour chaque lap, les champs suivants sont disponibles dans la table DynamoDB:
@@ -75,12 +69,12 @@ Note: Vous devez demander spécifiquement les attributs lapStatus, lapTime, lapP
     }
 
 ## Épreuve 4: Enregistrer votre voiture au directeur de course
-Maintenant que vous avez l’URL de votre service de voiture, il est temps d’enregistrer votre voiture pour pouvoir commencer à accumuler des tours de piste!
+Maintenant que vous avez l’URL de votre Lambda, il est temps d’enregistrer votre voiture pour pouvoir commencer à accumuler des tours de piste!
 
 Redéployez le service d'enregistrement utilisé à l'étape 2 en y ajoutant la variable d'environnement suivante:
-- **CAR_SERVICE_URL**: URL du load balancer de votre service de voiture
+- **CAR_SERVICE_URL**: URL de votre Lambda pour le challenge 3.
 
-## Épreuve 5: Recevoir les messages du directeur de course
-Si vous avez réussi toutes les épreuves précédentes, votre service de voiture devrait maintenant recevoir de messages réguliers du directeur de course. 
+## Épreuve 5: Recevoir les appels du directeur de course
+Si vous avez réussi toutes les épreuves précédentes, votre service de voiture devrait maintenant recevoir de appels réguliers du directeur de course. 
 
 Prenez la bonne action pour chaque lap et cumulez plus de tours de pistes que les autres équipes afin de remporter le grand prix!
