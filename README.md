@@ -81,4 +81,4 @@ Redéployez le service d'enregistrement utilisé à l'étape 2 en y ajoutant la 
 ## Épreuve 5: Recevoir les messages du directeur de course
 Si vous avez réussi toutes les épreuves précédentes, votre service de voiture devrait maintenant recevoir de messages réguliers du directeur de course. 
 
-Prenex la bonne action pour chaque lap et cumulez plus de tours de pistes que les autres équipes afin de remporter le grand prix!
+Prenez la bonne action pour chaque lap et cumulez plus de tours de pistes que les autres équipes afin de remporter le grand prix!
