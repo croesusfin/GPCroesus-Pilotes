@@ -30,8 +30,8 @@ Maintenant que vous avez trouvé l’URL du directeur de course, il est temps d�
 Créez un service AWS ECS qui sera utilisé pour enregistrer votre équipe. Vous aurez besoin d’un token pour enregistrer ce service. Le token est dans un service AWS bien connu pour la gestion des secrets. 
 
 Quelques informations utiles:
-- Le service doit être déployé dans le subnet xxxxxx
-- L’image ECR à utiliser est la suivante xxx
+- Le service doit être déployé dans le subnet xxx
+- L’image ECR à utiliser est la suivante: gpcroesus-challenge2-repo:latest
 - Le service ECS doit utiliser les variables d'environnement suivantes pour enregistrer la voiture correctement:
   - **RACE_DIRECTOR_URL**: URL du directeur de course trouvé plus tôt
   - **TEAM_ID**: Votre identifiant d'équipe
@@ -45,7 +45,7 @@ Afin de recevoir les messages du directeur de course pour compléter des tours, 
 - Le directeur enverra des payloads JSON à chaque 5 secondes à votre service, sur le port 12345:
   - Les messages seront envoyés avec un POST sur le chemin /startLap
   - Le payload contiendra un *lapId* que vous devrez utiliser pour récupérer les informations sur le lap en question
-    - Vous devrez récupérer ces informations dans la table DynamoDB gpcroesus-table et répondre correctement en fonction des détails indiqués pour le tour (voir plus bas)
+    - Vous devrez récupérer ces informations dans la table DynamoDB gpcroesus-laps et répondre correctement en fonction des détails indiqués pour le tour (voir plus bas)
 - Il y a deux actions à faire pour répondre à un message:
   - Répondre HTTP 200 à l'appel à /startLap
   - Placer un message de réponse dans la queue SQS gpcroesus-lap-queue
@@ -59,8 +59,8 @@ Afin de recevoir les messages du directeur de course pour compléter des tours, 
 Pour chaque lap, les champs suivants seront disponibles dans la table DynamoDB:
   - **lapId**: L'identifiant du lap. Utilisez celui reçu dans le requête HTTP pour trouver le bon enregistrement de lap.
   - **lapStatus**: Le statut du lap
-    - **DONE**: Le lap est complété avec succès
-    - **PITSTOP**: Vous devez faire un pit stop et répondre à une question!
+    - **DONE**: Le lap est complété avec succès, vous devrez retourner le temps pris
+    - **PITSTOP**: Vous devrez faire un pit stop et répondre à une question!
   - **lapTime**: Si lapStatus == DONE, le temps prit pour le lap tel que récupéré de la table DynamoDB
   - **lapPitStopQ**: Si lapStatus == PITSTOP, la question à répondre pour sortir du pit stop
 
@@ -68,8 +68,8 @@ Pour chaque lap, les champs suivants seront disponibles dans la table DynamoDB:
     {
       "teamId": "Votre identifiant d'équipe",
       "lapId": "abcde12345",
-      "lapTime": "1:20.559",
-      "lapPitStopA": "La réponse à la question si lapStatus == PITSTOP. Sinon, omettre cet element"
+      "lapTime": "1:20.559",                       # Si lapStatus == DONE
+      "lapPitStopA": "La réponse à la question"    # Si lapStatus == PITSTOP
     }
 
 ## Épreuve 4: Enregistrer votre voiture au directeur de course
@@ -81,4 +81,4 @@ Redéployez le service d'enregistrement utilisé à l'étape 2 en y ajoutant la 
 ## Épreuve 5: Recevoir les messages du directeur de course
 Si vous avez réussi toutes les épreuves précédentes, votre service de voiture devrait maintenant recevoir de messages réguliers du directeur de course. 
 
-Répondez correctement aux messages et cumulez plus de tours de pistes que les autres équipes afin de remporter le grand prix!
+Prenex la bonne action pour chaque lap et cumulez plus de tours de pistes que les autres équipes afin de remporter le grand prix!
