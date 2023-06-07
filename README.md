@@ -30,7 +30,7 @@ Maintenant que vous avez trouvé l’URL du directeur de course, il est temps d�
 Créez un service AWS ECS qui sera utilisé pour enregistrer votre équipe. Vous aurez besoin d’un token pour enregistrer ce service. Le token est dans un service AWS bien connu pour la gestion des secrets. 
 
 Quelques informations utiles:
-- Le service doit être déployé dans le subnet xxx
+- Le service doit être déployé dans le subnet team-N-subnet-a ou team-N-subnet-b (*N* est votre identifiant d'équipe, i.e. *teamId*)
 - L’image ECR à utiliser est la suivante: gpcroesus-challenge2-repo:latest
 - Le service ECS doit utiliser les variables d'environnement suivantes pour enregistrer la voiture correctement:
   - **RACE_DIRECTOR_URL**: URL du directeur de course trouvé plus tôt
@@ -40,8 +40,8 @@ Quelques informations utiles:
 
 ## Épreuve 3: Créer votre service de voiture
 Afin de recevoir les messages du directeur de course pour compléter des tours, vous devrez mettre en place un service de voiture qui recevra les messages:
-- Le service doit être déployé dans le subnet xxxx.
-- Un ALB doit absolument être utilisé. Le endpoint du load balancer doit être envoyé au directeur de course.
+- Le service doit être déployé dans le subnet team-N-subnet-a ou team-N-subnet-b (*N* est votre identifiant d'équipe, i.e. *teamId*)
+- Un ALB doit absolument être utilisé. Le endpoint du load balancer doit être envoyé au directeur de course
 - Le directeur enverra des payloads JSON à chaque 5 secondes à votre service, sur le port 12345:
   - Les messages seront envoyés avec un POST sur le chemin /startLap
   - Le payload contiendra un *lapId* que vous devrez utiliser pour récupérer les informations sur le lap en question
