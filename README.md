@@ -19,7 +19,7 @@ La voiture avec le plus de tours complétés après 3 heures sera déclarée gag
 La première étape est de trouver l’URL du directeur de course. Celle-ci sera utilisée pour enregistrer votre voiture et recevoir les appels pour compléter des tours de piste.
 Le URL du directeur de course est dans un fichier à l'intérieur du bucket S3 gpcroesus-2023-team-N (*N* est votre identifiant d'équipe, i.e. *teamId*). À vous de le trouver!
 
-Vous devez donc écrire une Lambda en Python (et probablement utiliser le SDK AWS PYthon Boto3, https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) qui va trouver l'URL 
+Vous devez donc écrire une Lambda en Python (et probablement utiliser le SDK AWS Python Boto3, https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) qui va trouver l'URL 
 caché dans un des fichiers du bucket S3. Pour vous aider un peu, le nom du fichier contenant l’URL est disponible dans Parameter Store sous le path suivant: /grandprix/teams/*teamId*/challenge1/filename.
 
 Attention! Le fichier et le paramètre peuvent seulement être lus par la ressource Lambda créé d'avance pour vous, soit team-N-challenge1-lambda (*N* est votre identifiant d'équipe, i.e. *teamId*).
@@ -27,19 +27,29 @@ Attention! Le fichier et le paramètre peuvent seulement être lus par la ressou
 ## Épreuve 2: Enregistrer votre équipe au directeur de course
 Maintenant que vous avez trouvé l’URL du directeur de course, il est temps d’enregistrer votre équipe pour pouvoir participer à la course!
 
-Créez un service AWS ECS qui sera utilisé pour enregistrer votre équipe. Vous aurez besoin d’un token pour enregistrer ce service. Le token est dans un service AWS bien connu pour la gestion des secrets. 
+Roulez une tâche ECS qui fera l'enregistrement de votre équipe auprès du directeur de course. Vous aurez besoin d’un token pour enregistrer ce service. Le token est dans un service AWS bien connu pour la gestion des secrets. 
 
 Quelques informations utiles:
-- Le service doit être déployé dans le subnet team-N-subnet-a ou team-N-subnet-b (*N* est votre identifiant d'équipe, i.e. *teamId*)
-- L’image ECR à utiliser est la suivante: gpcroesus-challenge2-repo:latest
-- Le service ECS doit utiliser les variables d'environnement suivantes pour enregistrer la voiture correctement:
+- Un cluster ECS à préalablement été déployé pour vous. Celui devant être utilisé porte le nom `team-<x>-cluster`.
+- Le type de lancement doit être `FARGATE`.
+- Le _task definition_ doit être `team-<x>-task-definition`
+- Les _subnets_ doivent être `team-<x>-subnet-a` et `team-<x>-subnet-b`
+- Le groupe de sécurité doit être `team-<x>-ecs-security-group`
+- _Public IP_ doit être mis à `off`
+
+La tâche ECS utilise les variables d'environnement suivantes pour enregistrer la voiture correctement:
   - **RACE_DIRECTOR_URL**: URL du directeur de course trouvé plus tôt
   - **TEAM_ID**: Votre identifiant d'équipe
-  - **DRIVER_NAME**: Nom de votre pilote/équipe
+  - **DRIVER_NAME**: Nom de votre pilote. Soyez original!
   - **REGISTRATION_TOKEN**: Token pour l’enregistrement de la voiture.
 
-## Épreuve 3: Créer votre service de voiture
-Afin de recevoir les appels du directeur de course afin de compléter des tours, vous devrez mettre en place un service de voiture qui recevra les appels:
+## Épreuve 3: Enregistrer la voiture
+
+Vous êtes presque prêt pour débuter la course! Vous devez maintenant enregister la voiture auprès du directeur de course pour compléter des tours.
+
+- Le directeur de course va vous 
+
+Le directeur de course va envoyer Afin de recevoir les appels du directeur de course afin de compléter des tours, vous devrez mettre en place un service de voiture qui recevra les appels:
 - Le service doit être implémenté dans une Lambda en Python. Utiliser le squelette team-N-challenge3-lambda (*N* est votre identifiant d'équipe, i.e. *teamId*))
 - Le directeur enverra des tours à l'URL de votre Lambda (nommé **CAR_SERVICE_URL** dans le reste du document) à chaque 15 secondes environ:
   - Les appels seront envoyés avec un GET comme ceci: **CAR_SERVICE_URL**/startLap/?LapId=<lapId>
