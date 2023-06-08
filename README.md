@@ -52,7 +52,7 @@ Vous êtes presque prêt pour débuter la course! Vous devez maintenant enregist
 Le directeur de course va envoyer Afin de recevoir les appels du directeur de course afin de compléter des tours, vous devrez mettre en place un service de voiture qui recevra les appels:
 - Le service doit être implémenté dans une Lambda en Python. Utiliser le squelette team-N-challenge3-lambda (*N* est votre identifiant d'équipe, i.e. *teamId*))
 - Le directeur enverra des tours à l'URL de votre Lambda (nommé **CAR_SERVICE_URL** dans le reste du document) à chaque 15 secondes environ:
-  - Les appels seront envoyés avec un GET comme ceci: **CAR_SERVICE_URL**/startLap/?LapId=<lapId>
+  - Les appels seront envoyés avec un GET comme ceci: **CAR_SERVICE_URL**/startLap/?LapId=[lapId]
   - Le payload contiendra un *lapId* que vous devrez utiliser pour récupérer les informations sur le lap en question
     - Vous devrez récupérer ces informations dans la table DynamoDB gpcroesus-laps et répondre correctement en fonction des détails indiqués pour le tour (voir plus bas)
 - Il y a deux actions à faire pour répondre à un message:
