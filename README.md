@@ -12,7 +12,7 @@ La voiture avec le plus de tours complétés après 3 heures sera déclarée gag
 ## Informations utiles à savoir avant de commencer
 - La console AWS à utiliser: https://560247168066.signin.aws.amazon.com/console
 - Vos identifiants, qui vous ont été communiqués avant ou au début du challenge:
-  - Votre login: gpcroesus-teamN (*N* est votre identifiant d'équipe, i.e. *teamId*)
+  - Votre login: gpcroesus-team<x> (*x* est votre identifiant d'équipe, i.e. *teamId*)
   - Votre mot de passe: *** 
 
 ## Épreuve 1: Trouver le endpoint du directeur de course
