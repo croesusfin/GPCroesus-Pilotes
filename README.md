@@ -35,7 +35,7 @@ Quelques informations utiles:
 - Un cluster ECS à préalablement été déployé pour vous. Celui devant être utilisé porte le nom `team-<x>-cluster`.
 - Le type de lancement doit être `FARGATE`.
 - Le _task definition_ doit être `team-<x>-task-definition`
-- Les _subnets_ doivent être `team-<x>-subnet-a` et `team-<x>-subnet-b`
+- Les _subnets_ doivent être `team-subnet-a` et `team-subnet-b`
 - Le groupe de sécurité doit être `team-<x>-ecs-security-group`
 - _Public IP_ doit être mis à `off`
 - L'image ECR est déjà déployée et prète à être utilisée. Aucune modification n'est requise.
