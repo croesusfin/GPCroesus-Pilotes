@@ -3,13 +3,14 @@
 # Contexte
 Toutes les voitures sont sur la ligne de départ et la course est lancée! 
 
-Par contre, cette course est un peu spéciale. Pour compléter un tour, le directeur de course vous enverra un message à toutes les voitures et celles-ci doivent retourner un message valide pour être crédité d’un tour. Vous devrez donc mettre en place divers services AWS avant que votre voiture fasse des tours. Et attention aux imprévus!
+Cette course est cependant un peu spéciale. Pour compléter un tour, le directeur de course vous enverra un message vous devrez retourner un message valide pour être crédité d’un tour.
 
 La voiture avec le plus de tours complétés après 3 heures sera déclarée gagnante.
 
 # Épreuves
 
 ## Informations utiles à savoir avant de commencer
+
 - La console AWS à utiliser: https://560247168066.signin.aws.amazon.com/console
 - Vos identifiants, qui vous ont été communiqués avant ou au début du challenge:
   - Votre login: gpcroesus-team<x> (*x* est votre identifiant d'équipe, i.e. *teamId*)
@@ -17,7 +18,8 @@ La voiture avec le plus de tours complétés après 3 heures sera déclarée gag
 
 ## Épreuve 1: Trouver le endpoint du directeur de course
 
-La première étape est de trouver l’URL du directeur de course. Celle-ci sera utilisée pour enregistrer votre voiture et recevoir les appels pour compléter des tours de piste.
+La première étape est de trouver l’URL du directeur de course. Celle-ci sera utilisée pour vous inscrire dans la course.
+
 L'URL du directeur de course est dans un fichier à l'intérieur du bucket S3 `gpcroesus-2023-team-<x>` (*x* est votre identifiant d'équipe, i.e. *teamId*). À vous de le trouver!
 
 Vous devez donc modifier la fonction lambda qui a été préalablement déployée  pour vous afin d'aller chercher et récupérer l'URL caché dans le bucket. La lambda a comme nom `team-<x>-challenge1-lambda`.
