@@ -74,7 +74,7 @@ Vous devez donc:
 - Modifier la lambda afin de recevoir et capturer le lapId envoyé par le directeur de course.
 - Faire une requête sur une table DynamoDB `gpcroesus-laps` afin d'aller chercher le temps du tour.
 - Générer un payload JSON pour la réponse.
-- Pousser la réponse dans la queue SQS `arn:aws:sqs:ca-central-1:560247168066:gpcroesus-lap-queue`.
+- Pousser la réponse dans la queue SQS `https://sqs.ca-central-1.amazonaws.com/560247168066/gpcroesus-lap-queue`.
 
 
 ### Détails sur les laps
