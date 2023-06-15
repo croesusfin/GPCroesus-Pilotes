@@ -99,3 +99,6 @@ Note: Vous devez demander spécifiquement les attributs lapStatus, lapTime, lapP
   "lapPitStopA": "La réponse à la question"    # Si lapStatus == PITSTOP
 }
 ```
+
+  # Leaderboard Grafana
+  https://croesus.grafana.net/d/e732b456-a8ca-4f7c-810d-010586b97c96/grand-prix-croesus?orgId=1&from=now-15m&to=now&refresh=15s
