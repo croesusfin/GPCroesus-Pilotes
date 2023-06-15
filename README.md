@@ -64,7 +64,7 @@ La voiture est enregistrée? Super! La course est débutée! Le directeur va mai
 
 Un tour de piste fonctionne comme suit:
 
-- Le directeur va invoquer votre lambda et lui passer un *lapId* en paramètre.
+- Le directeur va invoquer votre lambda et lui passer un *LapId* en paramètre.
 - Vous devez récupérer ce lapId et trouver le temps du tour de piste.
 - Le tour doit finalement être renvoyé au directeur de course via la _file d'arrivée_. Une file SQS.
 - Si l'information retournée est valide, vous serez crédité d'un tour.
