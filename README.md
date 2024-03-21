@@ -20,32 +20,34 @@ Choisissez votre coureur, enregistrez vous, la course débutera dans 30 minutes!
 
 # Pré-Course (9h - 9h30)
 
-## Étape 1: Trouver le endpoint du directeur de course
-
-La première étape est de trouver l’URL du directeur de course. Il sera utilisé pour vous inscrire dans la course.
-
-L'URL du directeur de course est dans un fichier à l'intérieur du bucket
-S3 `hackathoncroesus-team<X>-step1-bucket` (`<X>` est votre identifiant d'équipe, i.e. *teamId*). À vous de le trouver!
-
-Vous devez donc modifier la fonction lambda qui a été préalablement déployée pour vous afin d'aller chercher et
-récupérer l'URL caché dans le bucket. La lambda a comme nom `hackathoncroesus-team<X>-step1-lambda`.
-
-Pour vous aider un peu, le nom du fichier contenant l’URL est disponible dans Parameter Store sous le path
-suivant: `/hackathoncroesus/teams/*teamId*/step1/filename`.
-
-Attention! Le fichier et le paramètre SSM peuvent seulement être lus par la fonction Lambda!
-
-## Étape 2: Choisir la lambda utilisée par cotre coureur (son kart)
+## Étape 1: Choisir la lambda utilisée par cotre coureur (son kart)
 
 Nous avons déployé pour vous 2 possibilités de Lambda pour avancer dans la course:
 
-- Lambda en Python (`hackathoncroesus-team<X>-step2-python-lambda`)
-- Lambda en C# (`hackathoncroesus-team<X>-step2-csharp-lambda`)
+- Lambda en Python (`hackathoncroesus-team<X>-python-lambda-kart`)
+- Lambda en C# (`hackathoncroesus-team<X>-csharp-lambda-kart`)
 
 Les deux sont identiques, choisissez celle avec laquelle vous êtes le plus à l'aise (vous aurez besoin de coder quelques
 petites fonctions afin d'obtenir des bonis).
 
-Notez le _function URL_ de la lambda choisie, il vous sera requis à la prochaine étape.
+Notez le _function URL_ de la lambda choisie, il sera requis à l'étape 3.
+
+## Étape 2: Trouver le endpoint du directeur de course
+
+La deuxième étape est de trouver l’URL du directeur de course. Il sera utilisé pour vous inscrire dans la course.
+
+L'URL du directeur de course est dans un fichier à l'intérieur du bucket
+S3 `hackathoncroesus-team<X>-step2-bucket` (`<X>` est votre identifiant d'équipe, i.e. *teamId*). À vous de le trouver!
+
+Vous devez donc modifier la fonction lambda qui a été préalablement déployée pour vous afin d'aller chercher et
+récupérer l'URL caché dans le bucket. La lambda a comme nom `hackathoncroesus-team<X>-step2-lambda`.
+
+Pour vous aider un peu, le nom du fichier contenant l’URL est disponible dans Parameter Store sous le path
+suivant: `/hackathoncroesus/teams/*teamId*/step2/filename`.
+
+Attention! Le fichier et le paramètre SSM peuvent seulement être lus par la fonction Lambda!
+
+
 
 ## Étape 3: Enregistrer votre coureur au directeur de course
 
