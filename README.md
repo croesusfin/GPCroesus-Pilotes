@@ -1,104 +1,213 @@
-# GPCroesus-Pilotes
+# Hackathon Croesus 2024 - Mario Kart - Circuit Croesus
 
 # Contexte
-Toutes les voitures sont sur la ligne de départ et la course est lancée! 
 
-Cette course est cependant un peu spéciale. Pour compléter un tour, le directeur de course vous enverra un message vous devrez retourner un message valide pour être crédité d’un tour.
+La piste est prête, _rainbow road_ n'a rien à envier au Circuit Croesus.
 
-La voiture avec le plus de tours complétés après 3 heures sera déclarée gagnante.
+Le tout se déroulera sur 2 étapes, une pré-course (enregistrement de votre coureur) et la course (remplie
+d'opportunités)!
 
-# Épreuves
+La voiture avec le plus de tours complétés à la fin de l'épreuve sera déclarée gagnante.
+
+Choisissez votre coureur, enregistrez vous, la course débutera dans 30 minutes!
 
 ## Informations utiles à savoir avant de commencer
 
-- La console AWS à utiliser: https://560247168066.signin.aws.amazon.com/console
+- La console AWS à utiliser: https://<INSÉRER_NO_COMPTE>.signin.aws.amazon.com/console
 - Vos identifiants, qui vous ont été communiqués avant ou au début du challenge:
-  - Votre login: `gpcroesus-team<x>` (*x* est votre identifiant d'équipe, i.e. *teamId*)
-  - Votre mot de passe: *** 
+    - Votre login: `hackathoncroesus-team<X>` (*x* est votre identifiant d'équipe, i.e. *teamId*)
+    - Votre mot de passe: ***
 
-## Épreuve 1: Trouver le endpoint du directeur de course
+# Pré-Course (9h - 9h30)
 
-La première étape est de trouver l’URL du directeur de course. Celle-ci sera utilisée pour vous inscrire dans la course.
+## Étape 1: Choisir la lambda utilisée par cotre coureur (son kart)
 
-L'URL du directeur de course est dans un fichier à l'intérieur du bucket S3 `gpcroesus-2023-team-<x>` (*x* est votre identifiant d'équipe, i.e. *teamId*). À vous de le trouver!
+Nous avons déployé pour vous 2 possibilités de Lambda pour avancer dans la course:
 
-Vous devez donc modifier la fonction lambda qui a été préalablement déployée  pour vous afin d'aller chercher et récupérer l'URL caché dans le bucket. La lambda a comme nom `team-<x>-challenge1-lambda`.
+- Lambda en Python (`hackathoncroesus-team<X>-python-lambda-kart`)
+- Lambda en C# (`hackathoncroesus-team<X>-csharp-lambda-kart`)
 
-Pour vous aider un peu, le nom du fichier contenant l’URL est disponible dans Parameter Store sous le path suivant: `/grandprix/teams/*teamId*/challenge1/filename`.
+Les deux sont identiques, choisissez celle avec laquelle vous êtes le plus à l'aise (vous aurez besoin de coder quelques
+petites fonctions afin d'obtenir des bonis).
+
+Notez le _function URL_ de la lambda choisie, il sera requis à l'étape 3.
+
+## Étape 2: Trouver le endpoint du directeur de course
+
+La deuxième étape est de trouver l’URL du directeur de course. Il sera utilisé pour vous inscrire dans la course.
+
+L'URL du directeur de course est dans un fichier à l'intérieur du bucket
+S3 `hackathoncroesus-team<X>-step2-bucket` (`<X>` est votre identifiant d'équipe, i.e. *teamId*). À vous de le trouver!
+
+Vous devez donc modifier la fonction lambda qui a été préalablement déployée pour vous afin d'aller chercher et
+récupérer l'URL caché dans le bucket. La lambda a comme nom `hackathoncroesus-team<X>-step2-lambda`.
+
+Pour vous aider un peu, le nom du fichier contenant l’URL est disponible dans Parameter Store sous le path
+suivant: `/hackathoncroesus/teams/*teamId*/step2/filename`.
 
 Attention! Le fichier et le paramètre SSM peuvent seulement être lus par la fonction Lambda!
 
-## Épreuve 2: Enregistrer votre équipe au directeur de course
-Maintenant que vous avez trouvé l’URL du directeur de course, il est temps d’enregistrer votre pilote pour pouvoir participer à la course!
 
-Roulez une **tâche** ECS qui fera l'enregistrement de votre équipe auprès du directeur de course. Vous aurez besoin d’un token pour enregistrer ce service. Le token est dans un service AWS bien connu pour la gestion des secrets.
+
+## Étape 3: Enregistrer votre coureur au directeur de course
+
+Maintenant que vous avez trouvé l’URL du directeur de course et choisi votre cheval de bataille, il est temps
+d’enregistrer votre coureur et son kart pour pouvoir participer à la course!
+
+Roulez une **tâche ECS*** qui fera l'enregistrement de votre coureur auprès du directeur de course.
 
 Quelques informations utiles:
-- Un cluster ECS à préalablement été déployé pour vous. Celui devant être utilisé porte le nom `team-<x>-cluster`.
+
+- Un cluster ECS à préalablement été déployé pour vous. Celui devant être utilisé porte le
+  nom `hackathoncroesus-team<X>-step3-cluster`.
 - Le type de lancement doit être `FARGATE`.
-- Le _task definition_ doit être `team-<x>-task-definition`
+- Le _task definition_ doit être `hackathoncroesus-team<X>-step3-task-definition`
 - Les _subnets_ doivent être `team-subnet-a` et `team-subnet-b`
-- Le groupe de sécurité doit être `team-<x>-ecs-security-group`
+- Le groupe de sécurité doit être `hackathoncroesus-team<X>-step3-ecs-security-group`
 - _Public IP_ doit être mis à `off`
 - L'image ECR est déjà déployée et prète à être utilisée. Aucune modification n'est requise.
 
 La tâche ECS doit avoir les variables d'environnement suivantes pour enregistrer la voiture correctement.
-  - **RACE_DIRECTOR_URL**: URL du directeur de course trouvé plus tôt.
-  - **TEAM_ID**: Votre identifiant d'équipe.
-  - **DRIVER_NAME**: Nom de votre pilote. Soyez original!
-  - **REGISTRATION_TOKEN**: Token pour l’enregistrement de la voiture.
+
+- **TEAM_ID**: Votre identifiant d'équipe.
+- **DRIVER_NAME**: Nom de votre coureur. Respectez la thématique! (Attention, premier arrivé premier servi!)
+- **RACE_DIRECTOR_URL**: URL du directeur de course trouvé à l'étape 1.
+- **KART_SERVICE_URL**: URL de la lambda que vous avez choisi à l'étape 2.
 
 ### Astuces
 
-- Vous ne pourrez pas avoir accès au secret directement. Comment faire pour passer le secret au container?
 - Assurez-vous de prendre la bonne version de la _task definition_
 - Le directeur de course écoute sur le port 80.
 
-## Épreuve 3: Enregistrer la voiture
+Le coureur est enregistré et la course n'est pas commencée? Super, vous pouvez déjà penser aux challenges!
 
-Vous êtes presque prêt pour débuter la course! Vous devez maintenant enregister la voiture auprès du directeur de course pour compléter des tours. Nous avons déployé pour vous une lambda ayant comme nom `team-<x>-challenge3-lambda`. Prenez le _function URL_ de cette lambda et envoyez-la au directeur de course en utilisant la tâche ECS du challenge précédent.
+# Course (9h30 - 12h)
 
-Cette fois-ci, vous devez ajouter la variable d'environnement **CAR_SERVICE_URL** à la tâche avec l'URL de la lambda comme valeur pour que l'enregistrement se fasse correctement.
+La course est débutée! Le directeur va maintenant vous envoyer des tours de piste à chaque 30 secondes.
 
-La voiture est enregistrée? Super! La course est débutée! Le directeur va maintenant vous envoyer des tours de piste à chaque 15 secondes que vous devrez recevoir, traiter et renvoyer.
+## Tours de piste
 
 Un tour de piste fonctionne comme suit:
 
 - Le directeur va invoquer votre lambda et lui passer un *LapId* en paramètre.
-- Vous devez récupérer ce lapId et trouver le temps du tour de piste.
-- Le tour doit finalement être renvoyé au directeur de course via la _file d'arrivée_. Une file SQS.
-- Si l'information retournée est valide, vous serez crédité d'un tour.
+- Vous devez récupérer ce lapId et le renvoyer au directeur de course via la _file d'arrivée_, une file SQS.
+- Si l'information retournée est valide, vous serez crédité d'un tour, aussi simple que cela!
+
+### Exemple d'appel
+
+```https://<URL_DE_VOTRE_LAMBDA>?lapId=abcde12345```
+
+### Exemple de réponse attendue
+
+```json
+{
+  "teamId": "Votre identifiant d'équipe",
+  "lapId": "abcde12345"
+}
+```
 
 Vous devez donc:
 
 - Modifier la lambda afin de recevoir et capturer le lapId envoyé par le directeur de course.
-- Faire une requête sur une table DynamoDB `gpcroesus-laps` afin d'aller chercher le temps du tour.
 - Générer un payload JSON pour la réponse.
-- Pousser la réponse dans la queue SQS `https://sqs.ca-central-1.amazonaws.com/560247168066/gpcroesus-lap-queue`.
+- Pousser la réponse dans la queue
+  SQS `https://sqs.ca-central-1.amazonaws.com/<INSÉRER_NO_COMPTE>/hackathoncroesus-lap-queue`.
 
+## Challenges
 
-### Détails sur les laps
+Il est très possible, qu'en plus du *LapId*, le directeur de course vous offre la chance de jouer un bonus! Ceci est
+fait de façon aléatoire mais équitable!
 
-Pour chaque lap, les champs suivants sont disponibles dans la table DynamoDB:
-  - ``lapId``: L'identifiant du lap. Utilisez celui reçu dans le requête HTTP pour trouver le bon enregistrement de lap.
-  - ``lapStatus``: Le statut du lap
-    - ``DONE``: Le lap est complété avec succès, vous devrez retourner le temps pris
-    - ``PITSTOP``: Vous devrez faire un pit stop et répondre à une question!
-  - ``lapTime``: Si lapStatus == DONE, le temps prit pour le lap tel que récupéré de la table DynamoDB
-  - ``lapPitStopQ``: Si lapStatus == PITSTOP, la question à répondre pour sortir du pit stop
+Chaque challenge représente une fonction à compléter dans la Lambda qui vous a été fournie. La puissance du bonus est
+directement en lien avec la difficulté de la fonction à compléter.
 
-Note: Vous devez demander spécifiquement les attributs lapStatus, lapTime, lapPitStopQ lorsque vous faites votre get_item à DynamoDB, en utilisant lapId comme clé. Les scans sont refusés.
+### Exemple d'appel avec challenge
 
-### Format de la réponse JSON à placer dans la queue SQS
+```https://<URL_DE_VOTRE_LAMBDA>?lapId=abcde12345&challengeType=banana&challengeInput=abcdef```
+
+### Exemple de réponse attendue avec challenge
 
 ```json
 {
   "teamId": "Votre identifiant d'équipe",
   "lapId": "abcde12345",
-  "lapTime": "1:20.559",                       # Si lapStatus == DONE
-  "lapPitStopA": "La réponse à la question"    # Si lapStatus == PITSTOP
+  "challengeType": "banana",
+  "challengeOutput": "fedcba"
 }
 ```
 
-  # Leaderboard Grafana
-  https://croesus.grafana.net/d/e732b456-a8ca-4f7c-810d-010586b97c96/grand-prix-croesus?orgId=1&from=now-15m&to=now&refresh=15s
+### Liste des challenges
+
+#### Banane
+
+Bloque le prochain tour du coureur derrière vous
+
+* `challengeType=banana`
+* `challengeInput=...`
+
+#### Banane (triple)
+
+Bloque le prochain tour des 3 coureurs derrière vous
+
+* `challengeType=banana-triple`
+* `challengeInput=...`
+
+#### Carapace Rouge
+
+Bloque le prochain tour du coureur devant vous
+
+* `challengeType=red-shell`
+* `challengeInput=...`
+
+#### Carapace Rouge (triple)
+
+Bloque le prochain tour des 3 coureurs devant vous
+
+* `challengeType=red-shell-triple`
+* `challengeInput=...`
+
+#### Carapace Verte
+
+À une chance sur 2 de bloquer le prochain tour du coureur devant vous
+
+* `challengeType=green-shell`
+* `challengeInput=...`
+
+#### Carapace Verte (triple)
+
+À une chance sur 3 de bloquer le prochain tour des 3 coureurs devant vous
+
+* `challengeType=green-shell-triple`
+* `challengeInput=...`
+
+#### Carapace Bleue
+
+Bloque les 5 prochains tours du coureur en tête!
+
+* `challengeType=blue-shell`
+* `challengeInput=...`
+
+#### Champignon
+
+Vous fait faire 2 tours au lieu d'un seul
+
+* `challengeType=mushroom`
+* `challengeInput=...`
+
+#### Éclair
+
+Vous fait faire 3 tours au lieu d'un seul ET bloque le prochain tour de TOUS les autres coureurs!
+
+* `challengeType=lightning`
+* `challengeInput=...`
+
+#### Étoile
+
+Vous fait faire 5 tours au lieu d'un seul!
+
+* `challengeType=starpower`
+* `challengeInput=...`
+
+## Leaderboard Grafana
+
+https://croesus.grafana.net/<UPDATE_ME>
