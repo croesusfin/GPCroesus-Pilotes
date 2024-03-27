@@ -13,7 +13,7 @@ Choisissez votre coureur, enregistrez vous, la course débutera dans 30 minutes!
 
 ## Informations utiles à savoir avant de commencer
 
-- La console AWS à utiliser: https://<INSÉRER_NO_COMPTE>.signin.aws.amazon.com/console
+- La console AWS à utiliser: `https://637423207885.signin.aws.amazon.com/console`
 - Vos identifiants, qui vous ont été communiqués avant ou au début du challenge:
     - Votre login: `hackathoncroesus-team<X>` (*x* est votre identifiant d'équipe, i.e. *teamId*)
     - Votre mot de passe: ***
@@ -24,8 +24,8 @@ Choisissez votre coureur, enregistrez vous, la course débutera dans 30 minutes!
 
 Nous avons déployé pour vous 2 possibilités de Lambda pour avancer dans la course:
 
-- Lambda en Python (`hackathoncroesus-team<X>-python-lambda-kart`)
-- Lambda en C# (`hackathoncroesus-team<X>-csharp-lambda-kart`)
+- Lambda en Python (`hackathoncroesus-team<X>-step1-lambda-python-kart`)
+- Lambda en C# (`hackathoncroesus-team<X>-step1-lambda-csharp-kart`)
 
 Les deux sont identiques, choisissez celle avec laquelle vous êtes le plus à l'aise (vous aurez besoin de coder quelques
 petites fonctions afin d'obtenir des bonis).
@@ -43,7 +43,7 @@ Vous devez donc modifier la fonction lambda qui a été préalablement déployé
 récupérer l'URL caché dans le bucket. La lambda a comme nom `hackathoncroesus-team<X>-step2-lambda`.
 
 Pour vous aider un peu, le nom du fichier contenant l’URL est disponible dans Parameter Store sous le path
-suivant: `/hackathoncroesus/teams/*teamId*/step2/filename`.
+suivant: `/hackathoncroesus-team<X>-step2/filename`.
 
 Attention! Le fichier et le paramètre SSM peuvent seulement être lus par la fonction Lambda!
 
@@ -59,11 +59,11 @@ Roulez une **tâche ECS*** qui fera l'enregistrement de votre coureur auprès du
 Quelques informations utiles:
 
 - Un cluster ECS à préalablement été déployé pour vous. Celui devant être utilisé porte le
-  nom `hackathoncroesus-team<X>-step3-cluster`.
+  nom `hackathoncroesus-team<X>-cluster`.
+- - Le _task definition_ doit être `hackathoncroesus-team<X>-task-definition`
 - Le type de lancement doit être `FARGATE`.
-- Le _task definition_ doit être `hackathoncroesus-team<X>-step3-task-definition`
-- Les _subnets_ doivent être `team-subnet-a` et `team-subnet-b`
-- Le groupe de sécurité doit être `hackathoncroesus-team<X>-step3-ecs-security-group`
+- Les _subnets_ doivent être `hackathoncroesus-team<X>-subnet-a` et `hackathoncroesus-team<X>-subnet-b`
+- Le groupe de sécurité doit être `hackathoncroesus-team<X>-ecs-security-group`
 - _Public IP_ doit être mis à `off`
 - L'image ECR est déjà déployée et prète à être utilisée. Aucune modification n'est requise.
 
@@ -90,8 +90,8 @@ La course est débutée! Le directeur va maintenant vous envoyer des tours de pi
 Un tour de piste fonctionne comme suit:
 
 - Le directeur va invoquer votre lambda et lui passer un *LapId* en paramètre.
-- Vous devez récupérer ce lapId et le renvoyer au directeur de course via la _file d'arrivée_, une file SQS.
-- Si l'information retournée est valide, vous serez crédité d'un tour, aussi simple que cela!
+- Vous devez récupérer ce lapId et l'afficher dans la réponse en format JSON.
+- Si l'information retournée est valide, vous aurez fait un tour, aussi simple que cela!
 
 ### Exemple d'appel
 
@@ -110,8 +110,6 @@ Vous devez donc:
 
 - Modifier la lambda afin de recevoir et capturer le lapId envoyé par le directeur de course.
 - Générer un payload JSON pour la réponse.
-- Pousser la réponse dans la queue
-  SQS `https://sqs.ca-central-1.amazonaws.com/<INSÉRER_NO_COMPTE>/hackathoncroesus-lap-queue`.
 
 ## Challenges
 
