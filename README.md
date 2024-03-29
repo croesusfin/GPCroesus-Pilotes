@@ -20,17 +20,15 @@ Choisissez votre coureur, enregistrez vous, la course débutera dans 30 minutes!
 
 # Pré-Course (9h - 9h30)
 
-## Étape 1: Choisir la lambda utilisée par cotre coureur (son kart)
+## Étape 1: Trouver la lambda utilisée par votre coureur (son kart)
 
-Nous avons déployé pour vous 2 possibilités de Lambda pour avancer dans la course:
+Nous avons déployé pour vous une Lambda Python pour avancer dans la course:
 
 - Lambda en Python (`hackathoncroesus-team<X>-step1-lambda-python-kart`)
-- Lambda en C# (`hackathoncroesus-team<X>-step1-lambda-csharp-kart`)
 
-Les deux sont identiques, choisissez celle avec laquelle vous êtes le plus à l'aise (vous aurez besoin de coder quelques
-petites fonctions afin d'obtenir des bonis).
+Vous aurez besoin de coder quelques petites fonctions afin d'obtenir des bonis!
 
-Notez le _function URL_ de la lambda choisie, il sera requis à l'étape 3.
+Notez le _function URL_ de la lambda, il sera requis à l'étape 3.
 
 ## Étape 2: Trouver le endpoint du directeur de course
 
@@ -47,8 +45,6 @@ suivant: `/hackathoncroesus-team<X>-step2/filename`.
 
 Attention! Le fichier et le paramètre SSM peuvent seulement être lus par la fonction Lambda!
 
-
-
 ## Étape 3: Enregistrer votre coureur au directeur de course
 
 Maintenant que vous avez trouvé l’URL du directeur de course et choisi votre cheval de bataille, il est temps
@@ -60,7 +56,8 @@ Quelques informations utiles:
 
 - Un cluster ECS à préalablement été déployé pour vous. Celui devant être utilisé porte le
   nom `hackathoncroesus-team<X>-cluster`.
-- - Le _task definition_ doit être `hackathoncroesus-team<X>-task-definition`
+-
+    - Le _task definition_ doit être `hackathoncroesus-team<X>-task-definition`
 - Le type de lancement doit être `FARGATE`.
 - Les _subnets_ doivent être `hackathoncroesus-team<X>-subnet-a` et `hackathoncroesus-team<X>-subnet-b`
 - Le groupe de sécurité doit être `hackathoncroesus-team<X>-ecs-security-group`
