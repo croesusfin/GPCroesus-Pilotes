@@ -133,48 +133,61 @@ directement en lien avec la difficulté de la fonction à compléter.
 
 ### Liste des challenges
 * * *
-#### Carapace Rouge
+#### Carapace Rouge :turtle:
 >Vous recevez un array de string représentant des nombres hexadecimaux.
 >Vous devez trouvez lesquels de ces nombres sont des anagrames les uns des autres.
 >Les nombre formant des anagrames devront ensuite être aditionné puis retourné sous forme décimale pour former votre réponse.
 
-``` Bloque le prochain tour du coureur devant vous ```
 
-* `challengeType=red-shell`
-* `challengeInput=...`
+#### Exemple de input avec ce challenge
+
+* __`{challengeName: "redTurtle",
+    challengeParameter: "string[]"
+    }`__
+#### Avantage 
+``` Ralenti la vitesse du coureur devant vous (moderer) ```
 * * *
-#### Carapace Verte
+#### Carapace Verte :turtle:
 >Vous recevrez un paramètre en input qui sera un entier naturel entre 0 et 1000000.
 >  * Si l'entier est divisible par 3, vous devrez renvoyer «Fizz».
 >  * Si l'entier est divisible par 5, vous devrez renvoyer «Buzz».
 >  * Si l'entier est divisible par 3 et par 5, vous devrez renvoyer «FizzBuzz».
 >     Autrement, vous devrez renvoyer l'entier directement.
 
-``` À une chance sur 2 de bloquer le prochain tour du coureur devant vous```
 
-* `challengeType=green-shell`
-* `challengeInput=...`
+#### Exemple de input avec ce challenge
+* __`{challengeName: "greenTurtle",
+    challengeParameter: "999999999"
+    }`__
+#### Avantage 
+``` Ralenti la vitesse du coureur devant (faible)``` 
 * * *
-#### Carapace Verte (triple)
+#### Carapace Verte (triple) :turtle: :turtle: :turtle:
 
  >Vous recevrez un nombre premier en input. Il faut que vous renvoyiez le prochain nombre premier.
 
-```À une chance sur 3 de bloquer le prochain tour des 3 coureurs devant vous. ```
- 
 
-* `challengeType=green-shell-triple`
-* `challengeInput=...`
+ #### Exemple de input avec ce challenge
 
+* __`{challengeName: "tripleGreenTurtle",
+    challengeParameter: "243522324"
+    }`__
+#### Avantage
+```Ralenti la vitesse du coureur devant vous (modérer) ```
 * * *
-#### Champignon
+#### Champignon :mushroom:
 >Un nombre entier vous est fourni, vous devez retourner l'élément correspondant à cet index dans la suite de fibonacci.
 
-``` Vous fait faire 2 tours au lieu d'un seul ```
 
-* `challengeType=mushroom`
-* `challengeInput=...`
+#### Exemple de input avec ce challenge
+* __`{challengeName: "mushroom",
+    challengeParameter: "124352"
+    }`__
+
+#### Avantage
+``` Améliorer la vitesse de votre équipe (faible) ```
 * * *
-#### Éclair
+#### Drift :racing_car:
 >Deux nombres X et Y sont fourni. Vous devez répondre combien de bit sont différent entres les deux nombres.
 >  * exemple #1:
 >    * si x=1 et y=2 alors la représentation binaire est x=1 vs y=10, la réponse serait 2 bit de différent.
@@ -184,13 +197,17 @@ directement en lien avec la difficulté de la fonction à compléter.
 >      * x=8008 donc 1111101001000, y=3337 donc 110100001001      la réponse est 4
 >
 
-```Vous fait faire 3 tours au lieu d'un seul ET bloque le prochain tour de TOUS les autres coureurs! ```
 
-* `challengeType=lightning`
-* `challengeInput=...`
+#### Exemple de input avec ce challenge
+* __`{challengeName: "drift",
+    challengeParameter: "{x:1, y:2}"
+    }`__
+
+#### Avantage
+```Améliorer la vitesse de votre équipe (élevé) ```
 * * *
 
-#### Étoile
+#### Champigion d'or :mushroom:
 >Vous devez traverser toutes les cases d'une grille en commençant par le point XY de départ et terminant par le point fourni. Générez une string qui contiens vos déplacements. Seul les charactère V^<> sont accepté, ils représentent des déplacements.Le nombre de déplacement devrait être exactement la taille de la grille (X*Y -1) Les dimensions de la grille sont toujours des nombres pairs de 2 à 100. Les point de départ et de fin se trouvent toujours dans un coin. On ne demande jamais de traverser la grille en diagonal: le point de fin sera dans un coin adjascent. Voici comment les positions de la grille fournie sont imaginées pour une grille 4x4:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``` 1,1  2,1  3,1  4,1 ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;```1,2  2,2  3,2  4,2 ```
@@ -198,11 +215,16 @@ directement en lien avec la difficulté de la fonction à compléter.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``` 1,4  2,4  3,4  4,4 ```
 
 
-``` Vous fait faire 5 tours au lieu d'un seul! ```
 
-* `challengeType=starpower`
-* `challengeInput=...`
+#### Exemple de input avec ce challenge
+* __`{challengeName: "goldenMushroom",
+    challengeParameter: "V^<>"
+    }`__
+
+#### Avantage
+``` Amiliore la vitesse de votre equipe (eleve) ```
 * * *
+
 
 ## Leaderboard Grafana
 
