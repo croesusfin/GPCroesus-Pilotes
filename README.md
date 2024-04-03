@@ -82,127 +82,133 @@ Le coureur est enregistré et la course n'est pas commencée? Super, vous pouvez
 
 La course est débutée! Le directeur va maintenant vous envoyer des tours de piste à chaque 30 secondes.
 
-## Tours de piste
-
-Un tour de piste fonctionne comme suit:
-
-- Le directeur va invoquer votre lambda et lui passer un *LapId* en paramètre.
-- Vous devez récupérer ce lapId et l'afficher dans la réponse en format JSON.
-- Si l'information retournée est valide, vous aurez fait un tour, aussi simple que cela!
-
-### Exemple d'appel
-
-```https://<URL_DE_VOTRE_LAMBDA>?lapId=abcde12345```
-
-### Exemple de réponse attendue
-
-```json
-{
-  "teamId": "Votre identifiant d'équipe",
-  "lapId": "abcde12345"
-}
-```
-
-Vous devez donc:
-
-- Modifier la lambda afin de recevoir et capturer le lapId envoyé par le directeur de course.
-- Générer un payload JSON pour la réponse.
-
 ## Challenges
 
-Il est très possible, qu'en plus du *LapId*, le directeur de course vous offre la chance de jouer un bonus! Ceci est
-fait de façon aléatoire mais équitable!
-
-Chaque challenge représente une fonction à compléter dans la Lambda qui vous a été fournie. La puissance du bonus est
-directement en lien avec la difficulté de la fonction à compléter.
+À chaque tour de piste, le directeur de course appellera votre lambda à l'URL que vous avez enregistrée. Vous pourrez ainsi aller plus vite ou nuire aux autres coureurs si vous réussissez à répondre correctement aux challenges.
 
 ### Exemple d'appel avec challenge
 
-```https://<URL_DE_VOTRE_LAMBDA>?lapId=abcde12345&challengeType=banana&challengeInput=abcdef```
+```https://<URL_DE_VOTRE_LAMBDA>?challengeType=banana&challengeParameter=abcdef```
 
 ### Exemple de réponse attendue avec challenge
 
 ```json
 {
-  "teamId": "Votre identifiant d'équipe",
-  "lapId": "abcde12345",
-  "challengeType": "banana",
-  "challengeOutput": "fedcba"
+  "team_guid": "Votre GUID d'équipe",
+  "answer": "123abc"
 }
 ```
 
 ### Liste des challenges
+* * *
 
-#### Banane
+#### Banane :banana:
+>Vous recevrez un paramètre en input une chaine de caractères.
+>S'il s'agit d'un palindrome, retournez true.
+>Sinon, retournez false.
 
-Bloque le prochain tour du coureur derrière vous
+#### Exemple de input avec ce challenge
 
-* `challengeType=banana`
-* `challengeInput=...`
+* __`{challengeName: "banana",
+    challengeParameter: "123321"
+    }`__
+#### Avantage 
+``` Ralentit la vitesse du coureur devant vous (faible) ```
 
-#### Banane (triple)
+#### Carapace Rouge :turtle:
+>Vous recevez un array de string représentant des nombres hexadecimaux.
+>Vous devez trouver lesquels de ces nombres sont des anagrammes les uns des autres.
+>Les nombres formant des anagrammes devront ensuite être additionnés puis retournés sous forme décimale pour former votre réponse.
 
-Bloque le prochain tour des 3 coureurs derrière vous
 
-* `challengeType=banana-triple`
-* `challengeInput=...`
+#### Exemple de input avec ce challenge
 
-#### Carapace Rouge
+* __`{challengeName: "redTurtle",
+    challengeParameter: "string[]"
+    }`__
+#### Avantage 
+``` Ralentit la vitesse du coureur devant vous (modéré) ```
+* * *
+#### Carapace Verte :turtle:
+>Vous recevrez un paramètre en input qui sera un entier naturel entre 0 et 1000000.
+>  * Si l'entier est divisible par 3, vous devrez renvoyer «Fizz».
+>  * Si l'entier est divisible par 5, vous devrez renvoyer «Buzz».
+>  * Si l'entier est divisible par 3 et par 5, vous devrez renvoyer «FizzBuzz».
+>     Autrement, vous devrez renvoyer l'entier directement.
 
-Bloque le prochain tour du coureur devant vous
 
-* `challengeType=red-shell`
-* `challengeInput=...`
+#### Exemple de input avec ce challenge
+* __`{challengeName: "greenTurtle",
+    challengeParameter: "999999999"
+    }`__
+#### Avantage 
+``` Ralentit la vitesse du coureur devant (faible)``` 
+* * *
+#### Carapace Verte (triple) :turtle: :turtle: :turtle:
 
-#### Carapace Rouge (triple)
+ >Vous recevrez un nombre premier en input. Il faut que vous renvoyiez le prochain nombre premier.
 
-Bloque le prochain tour des 3 coureurs devant vous
 
-* `challengeType=red-shell-triple`
-* `challengeInput=...`
+ #### Exemple de input avec ce challenge
 
-#### Carapace Verte
+* __`{challengeName: "tripleGreenTurtle",
+    challengeParameter: "243522324"
+    }`__
+#### Avantage
+```Ralentit la vitesse du coureur devant vous (modéré) ```
+* * *
+#### Champignon :mushroom:
+>Un nombre entier vous est fourni, vous devez retourner l'élément correspondant à cet index dans la suite de fibonacci.
 
-À une chance sur 2 de bloquer le prochain tour du coureur devant vous
 
-* `challengeType=green-shell`
-* `challengeInput=...`
+#### Exemple de input avec ce challenge
+* __`{challengeName: "mushroom",
+    challengeParameter: "124352"
+    }`__
 
-#### Carapace Verte (triple)
+#### Avantage
+``` Améliorer la vitesse de votre équipe (faible) ```
+* * *
+#### Champigion d'or :mushroom: 
+>Deux nombres X et Y sont fournis. Vous devez répondre combien de bits sont différents entres les deux nombres.
+>  * exemple #1:
+>    * si x=1 et y=2 alors la représentation binaire est x=1 vs y=10, la réponse serait 2 bit de différent.
+>  * exemple #2: 
+>    * si x=6 et y=7 alors x=110 et y=111 la réponse est 1
+>  * exemple #3:
+>      * x=8008 donc 1111101001000, y=3337 donc 110100001001      la réponse est 4
+>
 
-À une chance sur 3 de bloquer le prochain tour des 3 coureurs devant vous
 
-* `challengeType=green-shell-triple`
-* `challengeInput=...`
+#### Exemple de input avec ce challenge
+* __`{challengeName: "goldenMushroom",
+    challengeParameter: "{x:1, y:2}"
+    }`__
 
-#### Carapace Bleue
+#### Avantage
+```Améliorer la vitesse de votre équipe (élevé) ```
+* * *
 
-Bloque les 5 prochains tours du coureur en tête!
+#### Drift :racing_car:
+>Vous devez traverser toutes les cases d'une grille en commençant par le point XY de départ et terminant par le point fourni. Générez une string qui contient vos déplacements. Seul les caractères V^<> sont acceptés, ils représentent des déplacements. Le nombre de déplacements devrait être exactement la taille de la grille (X*Y -1) Les dimensions de la grille sont toujours des nombres pairs de 2 à 100. Les points de départ et de fin se trouvent toujours dans un coin. On ne demande jamais de traverser la grille en diagonal: le point de fin sera dans un coin adjacent. Voici comment les positions de la grille fournie sont imaginées pour une grille 4x4:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``` 1,1  2,1  3,1  4,1 ```
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;```1,2  2,2  3,2  4,2 ```
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``` 1,3  2,3  3,3  4,3 ```
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``` 1,4  2,4  3,4  4,4 ```
 
-* `challengeType=blue-shell`
-* `challengeInput=...`
+> Pour cette grille, si le point de départ est 4,1 et le point d'arrivée 1,1 voici une réponse valide
+> vvv<^^^<vvv<^^^
 
-#### Champignon
+#### Exemple de input avec ce challenge
+* __`{challengeName: "drift",
+    challengeParameter: "{width: 4, height:4, startPositionX: 4, startPositionY: 1, finishPositionX: 1, finishPositionY: 1}"
+    }`__
 
-Vous fait faire 2 tours au lieu d'un seul
+#### Avantage
+``` Améliorer la vitesse de votre equipe (élevé) ```
+* * *
 
-* `challengeType=mushroom`
-* `challengeInput=...`
-
-#### Éclair
-
-Vous fait faire 3 tours au lieu d'un seul ET bloque le prochain tour de TOUS les autres coureurs!
-
-* `challengeType=lightning`
-* `challengeInput=...`
-
-#### Étoile
-
-Vous fait faire 5 tours au lieu d'un seul!
-
-* `challengeType=starpower`
-* `challengeInput=...`
 
 ## Leaderboard Grafana
 
-https://croesus.grafana.net/<UPDATE_ME>
+https://croesus.grafana.net/d/e732b456-a8ca-4f7c-810d-010586b97c96/hackathon-croesus-2024-mario-kart
