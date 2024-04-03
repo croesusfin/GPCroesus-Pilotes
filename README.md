@@ -135,8 +135,8 @@ directement en lien avec la difficulté de la fonction à compléter.
 * * *
 #### Carapace Rouge :turtle:
 >Vous recevez un array de string représentant des nombres hexadecimaux.
->Vous devez trouvez lesquels de ces nombres sont des anagrames les uns des autres.
->Les nombre formant des anagrames devront ensuite être aditionné puis retourné sous forme décimale pour former votre réponse.
+>Vous devez trouver lesquels de ces nombres sont des anagrammes les uns des autres.
+>Les nombres formant des anagrammes devront ensuite être additionnés puis retournés sous forme décimale pour former votre réponse.
 
 
 #### Exemple de input avec ce challenge
@@ -145,7 +145,7 @@ directement en lien avec la difficulté de la fonction à compléter.
     challengeParameter: "string[]"
     }`__
 #### Avantage 
-``` Ralenti la vitesse du coureur devant vous (moderer) ```
+``` Ralentit la vitesse du coureur devant vous (modéré) ```
 * * *
 #### Carapace Verte :turtle:
 >Vous recevrez un paramètre en input qui sera un entier naturel entre 0 et 1000000.
@@ -160,7 +160,7 @@ directement en lien avec la difficulté de la fonction à compléter.
     challengeParameter: "999999999"
     }`__
 #### Avantage 
-``` Ralenti la vitesse du coureur devant (faible)``` 
+``` Ralentit la vitesse du coureur devant (faible)``` 
 * * *
 #### Carapace Verte (triple) :turtle: :turtle: :turtle:
 
@@ -173,7 +173,7 @@ directement en lien avec la difficulté de la fonction à compléter.
     challengeParameter: "243522324"
     }`__
 #### Avantage
-```Ralenti la vitesse du coureur devant vous (modérer) ```
+```Ralentit la vitesse du coureur devant vous (modéré) ```
 * * *
 #### Champignon :mushroom:
 >Un nombre entier vous est fourni, vous devez retourner l'élément correspondant à cet index dans la suite de fibonacci.
@@ -188,7 +188,7 @@ directement en lien avec la difficulté de la fonction à compléter.
 ``` Améliorer la vitesse de votre équipe (faible) ```
 * * *
 #### Drift :racing_car:
->Deux nombres X et Y sont fourni. Vous devez répondre combien de bit sont différent entres les deux nombres.
+>Deux nombres X et Y sont fournis. Vous devez répondre combien de bits sont différents entres les deux nombres.
 >  * exemple #1:
 >    * si x=1 et y=2 alors la représentation binaire est x=1 vs y=10, la réponse serait 2 bit de différent.
 >  * exemple #2: 
@@ -208,7 +208,7 @@ directement en lien avec la difficulté de la fonction à compléter.
 * * *
 
 #### Champigion d'or :mushroom:
->Vous devez traverser toutes les cases d'une grille en commençant par le point XY de départ et terminant par le point fourni. Générez une string qui contiens vos déplacements. Seul les charactère V^<> sont accepté, ils représentent des déplacements.Le nombre de déplacement devrait être exactement la taille de la grille (X*Y -1) Les dimensions de la grille sont toujours des nombres pairs de 2 à 100. Les point de départ et de fin se trouvent toujours dans un coin. On ne demande jamais de traverser la grille en diagonal: le point de fin sera dans un coin adjascent. Voici comment les positions de la grille fournie sont imaginées pour une grille 4x4:
+>Vous devez traverser toutes les cases d'une grille en commençant par le point XY de départ et terminant par le point fourni. Générez une string qui contient vos déplacements. Seul les caractères V^<> sont acceptés, ils représentent des déplacements. Le nombre de déplacements devrait être exactement la taille de la grille (X*Y -1) Les dimensions de la grille sont toujours des nombres pairs de 2 à 100. Les points de départ et de fin se trouvent toujours dans un coin. On ne demande jamais de traverser la grille en diagonal: le point de fin sera dans un coin adjacent. Voici comment les positions de la grille fournie sont imaginées pour une grille 4x4:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``` 1,1  2,1  3,1  4,1 ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;```1,2  2,2  3,2  4,2 ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``` 1,3  2,3  3,3  4,3 ```
@@ -222,7 +222,7 @@ directement en lien avec la difficulté de la fonction à compléter.
     }`__
 
 #### Avantage
-``` Amiliore la vitesse de votre equipe (eleve) ```
+``` Améliorer la vitesse de votre equipe (élevé) ```
 * * *
 
 
