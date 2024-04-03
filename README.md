@@ -191,7 +191,7 @@ directement en lien avec la difficulté de la fonction à compléter.
 * * *
 
 #### Étoile
->Vous devez traverser toutes les cases d'une grille en commençant par le point XY de départ et terminant par le point fourni. Générez une string qui contiens vos déplacements. Seul les charactère V^<> sont accepté, ils représentent des déplacements.Le nombre de déplacement devrait être exactement la taille de la grille (X*Y -1) Les dimensions de la grille sont toujours des nombres pairs de 2 à 100. Les point de départ et de fin se trouvent toujours dans un coin. On ne demande jamais de traverser la grille en diagonal: le point de fin sera dans un coin adjascent. Voici comment les positions de la grille fournie sont imaginées pour une grille 4x4
+>Vous devez traverser toutes les cases d'une grille en commençant par le point XY de départ et terminant par le point fourni. Générez une string qui contiens vos déplacements. Seul les charactère V^<> sont accepté, ils représentent des déplacements.Le nombre de déplacement devrait être exactement la taille de la grille (X*Y -1) Les dimensions de la grille sont toujours des nombres pairs de 2 à 100. Les point de départ et de fin se trouvent toujours dans un coin. On ne demande jamais de traverser la grille en diagonal: le point de fin sera dans un coin adjascent. Voici comment les positions de la grille fournie sont imaginées pour une grille 4x4:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``` 1,1  2,1  3,1  4,1 ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;```1,2  2,2  3,2  4,2 ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;``` 1,3  2,3  3,3  4,3 ```
