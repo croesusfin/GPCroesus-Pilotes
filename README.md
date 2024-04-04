@@ -69,8 +69,8 @@ La tâche ECS doit avoir les variables d'environnement suivantes pour enregistre
 
 - **TEAM_ID**: Votre identifiant d'équipe.
 - **DRIVER_NAME**: Nom de votre coureur. Respectez la thématique! (Attention, premier arrivé premier servi!)
-- **RACE_DIRECTOR_URL**: URL du directeur de course trouvé à l'étape 1.
-- **KART_SERVICE_URL**: URL de la lambda que vous avez choisi à l'étape 2.
+- **KART_SERVICE_URL**: URL de la lambda que vous avez choisi à l'étape 1.
+- **RACE_DIRECTOR_URL**: URL du directeur de course trouvé dans le bucket (à l'étape 2).
 
 ### Astuces
 
