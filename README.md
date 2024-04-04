@@ -17,6 +17,7 @@ Choisissez votre coureur, enregistrez vous, la course débutera dans 30 minutes!
 - Vos identifiants, qui vous ont été communiqués avant ou au début du challenge:
     - Votre login: `hackathoncroesus-team<X>` (*x* est votre identifiant d'équipe, i.e. *teamId*)
     - Votre mot de passe: ***
+- Assurez-vous d'avoir spécifié la région ca-central-1 pour que votre infrastructure AWS soit bien fonctionnelle.
 
 # Pré-Course (9h30 - 10h)
 
