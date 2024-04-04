@@ -117,6 +117,7 @@ La course est débutée! Le directeur va maintenant vous envoyer des tours de pi
     }`__
 #### Avantage 
 ``` Ralentit la vitesse du coureur devant vous (faible) ```
+* * *
 
 #### Carapace Rouge :turtle:
 >Vous recevez un array de string représentant des nombres hexadecimaux.
@@ -209,6 +210,22 @@ La course est débutée! Le directeur va maintenant vous envoyer des tours de pi
 
 #### Avantage
 ``` Améliorer la vitesse de votre equipe (élevé) ```
+* * *
+
+#### Étoile :star:
+>Vous recevrez une chaine de caractères représentant:
+>       * un courriel (ex: allo@gmail.com), 
+>       * un code postal (ex: H1A 1Z9)
+>       * ou un numéro de téléphone (ex: (450) 662-6101).
+>     Vous devez renvoyer une regex qui permet de valider cette chaine de caractères.    
+
+#### Exemple de input avec ce challenge
+
+* __`{challengeName: "star",
+    challengeParameter: "(514) 254-6011"
+    }`__
+#### Avantage 
+``` Améliorer la vitesse de votre équipe (élevé) ```
 * * *
 
 
