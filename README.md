@@ -78,6 +78,8 @@ La tâche ECS doit avoir les variables d'environnement suivantes pour enregistre
 
 Le coureur est enregistré et la course n'est pas commencée? Super, vous pouvez déjà penser aux challenges!
 
+Utilisez votre GUID que vous avez obtenu du directeur de course dans la lambda pour la rendre opérationnelle (il y a une variable pour cela).
+
 # Course (10h - 12h30)
 
 La course est débutée! Le directeur va maintenant vous envoyer des tours de piste à chaque 30 secondes.
