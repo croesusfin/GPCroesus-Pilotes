@@ -18,7 +18,7 @@ Choisissez votre coureur, enregistrez vous, la course débutera dans 30 minutes!
     - Votre login: `hackathoncroesus-team<X>` (*x* est votre identifiant d'équipe, i.e. *teamId*)
     - Votre mot de passe: ***
 
-# Pré-Course (9h - 9h30)
+# Pré-Course (9h30 - 10h)
 
 ## Étape 1: Trouver la lambda utilisée par votre coureur (son kart)
 
@@ -78,7 +78,7 @@ La tâche ECS doit avoir les variables d'environnement suivantes pour enregistre
 
 Le coureur est enregistré et la course n'est pas commencée? Super, vous pouvez déjà penser aux challenges!
 
-# Course (9h30 - 12h)
+# Course (10h - 12h30)
 
 La course est débutée! Le directeur va maintenant vous envoyer des tours de piste à chaque 30 secondes.
 
